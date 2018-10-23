@@ -27,7 +27,7 @@ public class LinkStrand implements IDnaStrand {
 	@Override 
 	public void initialize(String source) {
 		myFirst = new Node(source);
-		myFirst = myLast;
+		myLast = myFirst;
 		mySize = source.length();
 		myAppends = 0;
 				
