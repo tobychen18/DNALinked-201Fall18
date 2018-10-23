@@ -51,14 +51,17 @@ public class LinkStrand implements IDnaStrand {
 	
 	@Override
 	public IDnaStrand reverse() {
-		StringBuilder reversedStringBuilder = new StringBuilder();
-		reversedStringBuilder.append(this.toString()).reverse();
-		ArrayList<String> reversedStringsInSameOrder = new ArrayList<String>();
-		Node list = myFirst;
-		int pointer = 0;
-		int size = reversedStringBuilder.length();
-		while(list != null) {
-			reversedStringsInSameOrder.add(reversedStringBuilder.substring(size - (list.info.length() + pointer), list.info.length()+pointer));
+		StringBuilder reversedStringBuilder = new StringBuilder(); //make a new string builder
+		reversedStringBuilder.append(this.toString()).reverse(); //reverse all the strings in this list
+		ArrayList<String> reversedStringsInSameOrder = new ArrayList<String>(); //make an arrayList to store the reversed strings but not in the correct order yet
+		Node list = myFirst; //make a new node pointer
+		int pointer = 0; //make a pointerValue
+		int size = reversedStringBuilder.length(); //get the size of the string we reversed
+		while(list != null) { //for all the things in list
+			
+			String nodeReversedString = reversedStringBuilder.substring(size-(list.info.length()+pointer), size - pointer).toString();
+			reversedStringsInSameOrder.add(nodeReversedString);
+			
 			pointer += list.info.length();
 			list = list.next;
 		}
