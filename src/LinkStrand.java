@@ -56,8 +56,9 @@ public class LinkStrand implements IDnaStrand {
 		ArrayList<String> reversedStringsInSameOrder = new ArrayList<String>();
 		Node list = myFirst;
 		int pointer = 0;
+		int size = reversedStringBuilder.length();
 		while(list != null) {
-			reversedStringsInSameOrder.add(reversedStringBuilder.substring(pointer, list.info.length()+pointer));
+			reversedStringsInSameOrder.add(reversedStringBuilder.substring(size - (list.info.length() + pointer), list.info.length()+pointer));
 			pointer += list.info.length();
 			list = list.next;
 		}
