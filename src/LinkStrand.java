@@ -51,9 +51,9 @@ public class LinkStrand implements IDnaStrand {
 	
 	@Override
 	public IDnaStrand reverse() {
-		StringBuilder reversedStringBuilder = null;
+		StringBuilder reversedStringBuilder = new StringBuilder();
 		reversedStringBuilder.append(this.toString()).reverse();
-		ArrayList<String> reversedStringsInSameOrder = new ArrayList<>();
+		ArrayList<String> reversedStringsInSameOrder = new ArrayList<String>();
 		Node list = myFirst;
 		int pointer = 0;
 		while(list != null) {
