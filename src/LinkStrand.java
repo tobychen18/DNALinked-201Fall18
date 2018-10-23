@@ -29,8 +29,7 @@ public class LinkStrand implements IDnaStrand {
 		myFirst = new Node(source);
 		myLast = myFirst;
 		mySize = source.length();
-		myAppends = 0;
-				
+		myAppends = 0;			
 	}
 	
 	@Override 
@@ -62,9 +61,9 @@ public class LinkStrand implements IDnaStrand {
 			pointer += list.info.length();
 			list = list.next;
 		}
-		LinkStrand reversed = new LinkStrand(reversedStringsInSameOrder.get(reversedStringsInSameOrder.size()-1));
+		LinkStrand reversed = new LinkStrand(reversedStringsInSameOrder.get(reversedStringsInSameOrder.size()-1).toString());
 		for(int i = reversedStringsInSameOrder.size()-2; i >= 0; i--) {
-			reversed.append(reversedStringsInSameOrder.get(i));
+			reversed.append(reversedStringsInSameOrder.get(i).toString());
 		}
 		return reversed;
 	}
