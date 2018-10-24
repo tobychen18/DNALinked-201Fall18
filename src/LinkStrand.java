@@ -96,7 +96,10 @@ public class LinkStrand implements IDnaStrand {
 	}
 	@Override
 	public char charAt(int index) {
-		if(myCurrent == null || myIndex>index) {
+		if(index > this.size() || index< 0) {
+			throw new IndexOutOfBoundsException("not a valid index");
+		}
+		if(myIndex>index || myCurrent == null) {
 			myCurrent = myFirst;
 			myLocalIndex = 0;
 			myIndex = 0;
