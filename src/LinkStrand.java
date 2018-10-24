@@ -102,13 +102,13 @@ public class LinkStrand implements IDnaStrand {
 			myIndex = 0;
 		}
 		while(myIndex != index) {
-			if(myLocalIndex > myCurrent.info.length())
+			myIndex++;
+			myLocalIndex++; //got to do this before you test the if statement because if not you could get an index out of bounds error
+			if(myLocalIndex >= myCurrent.info.length())
 			{
 				myCurrent = myCurrent.next;
 				myLocalIndex = 0;
 			}
-			myIndex++;
-			myLocalIndex++;
 		}
 		return myCurrent.info.charAt(myLocalIndex);
 	}

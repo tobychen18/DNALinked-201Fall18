@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class CodonProfiler {
-	
+
 	/**
 	 * Count how many times each codon in an array of codons occurs
 	 * in a strand of DNA. Return int[] such that int[k] is number
@@ -27,15 +27,15 @@ public class CodonProfiler {
 				c = iter.next();
 			}
 			if(b != 'z' && c != 'z') {
-				
-			String codon = "" + a + b + c;
-			if(!map.containsKey(codon)) {
-				map.put(codon, 1);
+
+				String codon = "" + a + b + c;
+				if(!map.containsKey(codon)) {
+					map.put(codon, 1);
+				}
+				else {
+					map.put(codon, map.get(codon)+1);
+				}
 			}
-			else {
-				map.put(codon, map.get(codon)+1);
-			}
-		}
 		}
 		for( int i = 0; i < codons.length; i++) {
 			if(map.containsKey(codons[i])) {
@@ -45,14 +45,14 @@ public class CodonProfiler {
 				ret[i] = 0;
 			}
 		}
-		
+
 		return ret;
-		}
+	}
 }
-		
-		/*
-		
-		
+
+/*
+
+
 		for(int k=0; k < codons.length; k++) {
 			Iterator<Character> iter = strand.iterator();
 			while (iter.hasNext()) {
@@ -74,4 +74,4 @@ public class CodonProfiler {
 		return ret;
 	}
 }
-*/
+ */
