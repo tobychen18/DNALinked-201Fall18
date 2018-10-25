@@ -1,9 +1,82 @@
-Your Name here
-Your NetID here
-Your Partner's name here (or erase)
-Your Partner's NetID here (or erase)
+Toby Chen
+tc248
 
-Questions here will come from the assignment
-writeup. Be sure to copy paste questions and 
-your explanations before you push to GitHub and
-do that before uploading to Gradescope
+Run benchmarks on two provided classes and one class you design. Describe the results of running the benchmarks in your analysis.txt file. The description of what to do for running the benchmarks is described in the Benchmark Results section. You can run two of the three benchmarks before completing the implementation of LinkStrand described next. 
+
+-----
+Class	                splicee	      recomb	time	appends
+-----
+LinkStrand:	            256	      4,800,471	0.039	1290
+LinkStrand:	            512	      4,965,591	0.021	1290
+LinkStrand:	          1,024	      5,295,831	0.011	1290
+LinkStrand:	          2,048	      5,956,311	0.007	1290
+LinkStrand:	          4,096	      7,277,271	0.009	1290
+LinkStrand:	          8,192	      9,919,191	0.006	1290
+LinkStrand:	         16,384	     15,203,031	0.007	1290
+LinkStrand:	         32,768	     25,770,711	0.007	1290
+LinkStrand:	         65,536	     46,906,071	0.004	1290
+LinkStrand:	        131,072	     89,176,791	0.005	1290
+LinkStrand:	        262,144	    173,718,231	0.008	1290
+LinkStrand:	        524,288	    342,801,111	0.006	1290
+LinkStrand:	      1,048,576	    680,966,871	0.007	1290
+LinkStrand:	      2,097,152	  1,357,298,391	0.009	1290
+LinkStrand:	      4,194,304	  2,709,961,431	0.007	1290
+LinkStrand:	      8,388,608	  5,415,287,511	0.007	1290
+LinkStrand:	     16,777,216	 10,825,939,671	0.007	1290
+LinkStrand:	     33,554,432	 21,647,243,991	0.007	1290
+LinkStrand:	     67,108,864	 43,289,852,631	0.008	1290
+LinkStrand:	    134,217,728	 86,575,069,911	0.009	1290
+LinkStrand:	    268,435,456	173,145,504,471	0.014	1290
+LinkStrand:	    536,870,912	346,286,373,591	0.009	1290
+
+-----
+Class	                splicee	      recomb	time	appends
+-----
+StringStrand:	            256	      4,800,471	0.576	1290
+StringStrand:	            512	      4,965,591	0.632	1290
+StringStrand:	          1,024	      5,295,831	0.577	1290
+StringStrand:	          2,048	      5,956,311	0.650	1290
+StringStrand:	          4,096	      7,277,271	0.906	1290
+StringStrand:	          8,192	      9,919,191	1.263	1290
+StringStrand:	         16,384	     15,203,031	1.988	1290
+StringStrand:	         32,768	     25,770,711	3.628	1290
+StringStrand:	         65,536	     46,906,071	6.914	1290
+StringStrand:	        131,072	     89,176,791	13.638	1290
+StringStrand:	        262,144	    173,718,231	26.499	1290
+StringStrand:	        524,288	    342,801,111	61.904	1290
+StringStrand:	      1,048,576	    680,966,871	121.623	1290
+StringStrand:	      2,097,152	  1,357,298,391	248.997	1290
+
+-----
+Class	                	splicee	      recomb	time	appends
+-----
+StringBuilderStrand:	            256	      4,800,471	0.036	1290
+StringBuilderStrand:	            512	      4,965,591	0.023	1290
+StringBuilderStrand:	          1,024	      5,295,831	0.011	1290
+StringBuilderStrand:	          2,048	      5,956,311	0.010	1290
+StringBuilderStrand:	          4,096	      7,277,271	0.010	1290
+StringBuilderStrand:	          8,192	      9,919,191	0.012	1290
+StringBuilderStrand:	         16,384	     15,203,031	0.019	1290
+StringBuilderStrand:	         32,768	     25,770,711	0.037	1290
+StringBuilderStrand:	         65,536	     46,906,071	0.083	1290
+StringBuilderStrand:	        131,072	     89,176,791	0.184	1290
+StringBuilderStrand:	        262,144	    173,718,231	0.173	1290
+StringBuilderStrand:	        524,288	    342,801,111	0.335	1290
+StringBuilderStrand:	      1,048,576	    680,966,871	0.716	1290
+
+Question 1: are the benchmark timings for StringStrand consistent with the explanation below that the time to execute cutAndSplice is O(b^2S)? 
+
+Note that the value of b is half the number of calls to append since each cut (except the first) is modeled by two calls of append in the method cutAndSplice -- see the code. This means that b2 will be constant in the benchmark, but S will vary. 
+
+Yes the benchmark timings for stringStrand are consistent with the explanation below that the time to execute cutAndSplice is O(b^2 * s). Given that b aka then number of appends is constant, the time change is not a result of any change to be. Therefore, the only thing contributing to this time change is the length of the splicee. As we see, as splicee increases, the time increases not necessarily at small numbers but as number get large such as splicee = ~1,000,000 to splicee = ~2,000,000 the time increases by ~double from 121 seconds to 248 seconds. This is because at small numbers, the computer is able to handle that small change in extra processing very easily because computers run extremely fast so a small increase may have a negligible/irrelevant effect so it makes sense that at small numbers we don't see too much of an effect but at higher numbers we do which makes sense.
+
+
+Question 2: are the benchmark timings for StringBuilderStrand consistent with the explanation below that the time to execute cutAndSplice is O(bS)? 
+
+Note that the value of b is half the number of calls to append since each cut (except the first) is modeled by two calls of append in the method cutAndSplice -- see the code. This means that b will be constant in the benchmark, but S will vary. 
+
+Yes the benchmark timings for StringBuilderStrand is consistent with the explanation that the time to execute is O(bS). First, we know that b is a constant but b is a much smaller constant that b^2 thus we can see that the runtime for StringBuilder is much faster than StringStrand because of that b is a much smaller constant than b^s. Furthermore, again the same thing about small sizes of splicee that applies to STringStrand also applies to StrinBuilderStrand, at small increase in splicee the change is almost irrelevant to the computer since computers can do so much in a short amount of time so at small changes in splicee size, our times do not change that much. But at larger sizes time changes in a similar factor as splicee changes. For example when splicee changes from 524,288 to 1,048,576, a factor of 2 or doubling, the time increases from .335 to .716 which is approximately an increase of a factor of 2 or approximately double which is what we'd expect. So the benchmark timings are consistent with the explanation that the time to execute is O(bS).
+
+Question 3: Explain why the time for LinkStrand does not change much at all over all the runs in the benchmark program. Explain why you think memory is exhausted at the specific strand size you see in your timings -- as compared to exhaustion for String and StringBuilder.
+
+The time for LinkStrand does not change much at all over all the runs in the benchMark program because you are only changing pointers in link strand. Thus, it is much more efficient instead of changing the entire string or a large part of the string, you simple changing the node information in the linkedStrand which is an extremely small change relative to the StringStrand/StringBuilder and relative to what computers can handle. This is O(1) efficiency because you are only changing one node rather than for string and string builder where you have to copy everything from the original string/stringbuilder. Thus, it makes sense time does not change too much since this small change will not be enough to be relevant to the computer. Furthermore, LinkStrand is able to handle much larger Splicee sizes, while not running out of space compared to StringStrand and StringBuilder. This is again because of the linked strand. Multiple nodes can point to the same object meaning that you do not need to create as many huge string objects. While in stringBuilder and StringStrand you must create new string objects and huge string objects. In linkStrand you create multiple small string objects and nodes can point to the same string object so in total that repetition can allow link strand to be much more efficient with its memory as it can point to the same object and save memory. Moreover, StringBuilderStrand and StringStrand uses arrays and that takes more memory since you must allocate memory for a larger and larger array so that uses more memory and linkstarnd uses less memory therefore it makes sense that it can have a lot longer splicee without running out of memory.

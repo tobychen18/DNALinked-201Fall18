@@ -1,3 +1,8 @@
+/**
+ * create a more efficient version of get Codon profile
+ * @author toby chen tc248
+ */
+
 import java.util.*;
 
 public class CodonProfiler {
@@ -51,6 +56,8 @@ public class CodonProfiler {
 	}
 }
 
+
+//old inefficient code
 /*
 
 
